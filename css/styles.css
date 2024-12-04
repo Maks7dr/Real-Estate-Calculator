@@ -4,9 +4,9 @@ body {
   margin-top: 20px;
   background-image: url(../images/background.jpg);
   background-repeat: no-repeat;
-  background-size: 768px;
-  background-position-x: -68px;
-  background-position-y: -137px;
+  background-size: 694px;
+  background-position-x: -55px;
+  background-position-y: -72px;
   color: #111;
 }
 
@@ -16,7 +16,7 @@ input {
   margin-top: 20px;
   border-radius: 12px;
   border: 2px solid #ff6a6a;
-  width: 200px;
+  max-width: 160px;
   outline: transparent;
 }
 
