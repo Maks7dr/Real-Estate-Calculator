@@ -4,36 +4,72 @@ function calculatePropertyTax(propertyValue) {
     return 'Введите корректную сумму недвижимости!';
   }
 
-  // Рассчитываем 2%, 1% и 30% от них
-  const twoPercent = propertyValue * 0.02;
-  const onePercent = propertyValue * 0.01;
-  const thirtyPercentOfTwoPercent = twoPercent * 0.3;
-  const thirtyPercentOfOnePercent = onePercent * 0.3;
+  // Рассчитываем 2% и 1% от суммы
+  const twoPercent = Math.floor(propertyValue * 0.02); // Округляем до целого
+  const onePercent = Math.floor(propertyValue * 0.01); // Округляем до целого
 
   return {
-    twoPercent: twoPercent.toFixed(2),
-    onePercent: onePercent.toFixed(2),
-    thirtyPercentOfTwoPercent: thirtyPercentOfTwoPercent.toFixed(2),
-    thirtyPercentOfOnePercent: thirtyPercentOfOnePercent.toFixed(2),
+    twoPercent: twoPercent,
+    onePercent: onePercent,
   };
+}
+
+// Функция для расчета 30% от уже рассчитанных значений
+function calculateThirtyPercent(values) {
+  const thirtyPercentOfTwoPercent = Math.floor(values.twoPercent * 0.3); // Округляем до целого
+  const thirtyPercentOfOnePercent = Math.floor(values.onePercent * 0.3); // Округляем до целого
+
+  return {
+    thirtyPercentOfTwoPercent: thirtyPercentOfTwoPercent,
+    thirtyPercentOfOnePercent: thirtyPercentOfOnePercent,
+  };
+}
+
+// Функция форматирования числа с разделением пробелами
+function formatNumberWithSpaces(number) {
+  return number.toLocaleString('ru-RU');
 }
 
 // Пример использования
 const propertyValue = prompt('Введите сумму стоимости недвижимости:');
-const result = calculatePropertyTax(parseFloat(propertyValue));
+const baseResult = calculatePropertyTax(parseFloat(propertyValue));
 
-if (typeof result === 'string') {
-  console.log(result);
-  alert(result);
+if (typeof baseResult === 'string') {
+  console.log(baseResult);
+  alert(baseResult);
 } else {
-  console.log(`2% от стоимости: ${result.twoPercent}`);
-  console.log(`1% от стоимости: ${result.onePercent}`);
-  console.log(`30% от 2%: ${result.thirtyPercentOfTwoPercent}`);
-  console.log(`30% от 1%: ${result.thirtyPercentOfOnePercent}`);
-  alert(
-    `2% от стоимости: ${result.twoPercent}\n` +
-      `1% от стоимости: ${result.onePercent}\n` +
-      `30% от 2%: ${result.thirtyPercentOfTwoPercent}\n` +
-      `30% от 1%: ${result.thirtyPercentOfOnePercent}`
+  console.log(
+    `2% от стоимости: ${formatNumberWithSpaces(baseResult.twoPercent)}`
   );
+  console.log(
+    `1% от стоимости: ${formatNumberWithSpaces(baseResult.onePercent)}`
+  );
+  alert(
+    `2% от стоимости: ${formatNumberWithSpaces(baseResult.twoPercent)}\n` +
+      `1% от стоимости: ${formatNumberWithSpaces(baseResult.onePercent)}`
+  );
+
+  // Спрашиваем пользователя, хочет ли он показать 30%
+  const showThirty = confirm('Показать 30% от этих значений?');
+  if (showThirty) {
+    const thirtyPercentResult = calculateThirtyPercent(baseResult);
+    console.log(
+      `30% от 2%: ${formatNumberWithSpaces(
+        thirtyPercentResult.thirtyPercentOfTwoPercent
+      )}`
+    );
+    console.log(
+      `30% от 1%: ${formatNumberWithSpaces(
+        thirtyPercentResult.thirtyPercentOfOnePercent
+      )}`
+    );
+    alert(
+      `30% от 2%: ${formatNumberWithSpaces(
+        thirtyPercentResult.thirtyPercentOfTwoPercent
+      )}\n` +
+        `30% от 1%: ${formatNumberWithSpaces(
+          thirtyPercentResult.thirtyPercentOfOnePercent
+        )}`
+    );
+  }
 }
