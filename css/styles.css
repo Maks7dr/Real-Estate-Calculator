@@ -3,21 +3,19 @@ body {
   margin: 20px;
 }
 
-label {
-  margin-bottom: 20px;
-}
-
 input {
   padding: 10px;
   font-size: 16px;
+  margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 12px;
   border: 2px solid #ff6a6a;
-  width: 375px;
+  width: 200px;
+  outline: transparent;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 11.6px 20px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 12px;
@@ -27,4 +25,8 @@ button {
 
 #result p {
   margin: 10px 0;
+}
+
+p {
+  color: black;
 }
