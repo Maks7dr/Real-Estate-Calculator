@@ -1,13 +1,19 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
-  margin-top: 20px;
+  margin-top: 45px;
   background-image: url(../images/background.jpg);
   background-repeat: no-repeat;
   background-size: 694px;
   background-position-x: -55px;
   background-position-y: -72px;
   color: #111;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 23px;
+  text-align: center;
 }
 
 input {
