@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="./js/real-estate-calculator.js"></script>
-    <link rel="stylesheet" href="./css/styles.css" class="stylesheet" />
+    <title>Калькулятор стоимости недвижимости</title>
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <header>
-      <img src="./images/background.jpg" alt="" width="768" class="foto" />
-    </header>
+    <h1 class="title">Калькулятор стоимости недвижимости</h1>
+    <label for="propertyValue" class="calc-caption"
+      >Введите сумму стоимости недвижимости:</label
+    >
+    <input
+      id="propertyValue"
+      type="text"
+      placeholder="Например, 1 000 000"
+      class="calc-input"
+    />
+    <button id="calculateButton" class="calc-btn">Рассчитать</button>
+    <div id="result"></div>
+    <script src="./js/real-estate-calculator.js"></script>
   </body>
 </html>

@@ -1,75 +1,50 @@
-// Функция для расчета процентов
-function calculatePropertyTax(propertyValue) {
+// Форматирование ввода
+const propertyValueInput = document.getElementById('propertyValue');
+propertyValueInput.addEventListener('input', event => {
+  const input = event.target.value.replace(/\s+/g, ''); // Убираем пробелы
+  if (!isNaN(input)) {
+    event.target.value = Number(input).toLocaleString('ru-RU'); // Форматируем
+  }
+});
+
+// Основная функция расчета
+function calculate() {
+  const rawValue = propertyValueInput.value.replace(/\s+/g, ''); // Убираем пробелы
+  const propertyValue = parseFloat(rawValue);
+
   if (isNaN(propertyValue) || propertyValue <= 0) {
-    return 'Введите корректную сумму недвижимости!';
+    document.getElementById('result').innerHTML =
+      '<p style="color: red;">Введите корректную сумму!</p>';
+    return;
   }
 
-  // Рассчитываем 2% и 1% от суммы
-  const twoPercent = Math.floor(propertyValue * 0.02); // Округляем до целого
-  const onePercent = Math.floor(propertyValue * 0.01); // Округляем до целого
+  // Расчет процентов
+  const twoPercent = Math.floor(propertyValue * 0.02);
+  const onePercent = Math.floor(propertyValue * 0.01);
 
-  return {
-    twoPercent: twoPercent,
-    onePercent: onePercent,
-  };
+  // Отображение результатов
+  const resultDiv = document.getElementById('result');
+  resultDiv.innerHTML = `
+    <p>2% от стоимости: <b>${twoPercent.toLocaleString('ru-RU')}</b></p>
+    <p>1% от стоимости: <b>${onePercent.toLocaleString('ru-RU')}</b></p>
+    <button id="showThirtyPercent">Показать 30% от этих значений</button>
+  `;
+
+  // Обработчик для 30%
+  document.getElementById('showThirtyPercent').addEventListener('click', () => {
+    const thirtyPercentOfTwoPercent = Math.floor(twoPercent * 0.3);
+    const thirtyPercentOfOnePercent = Math.floor(onePercent * 0.3);
+
+    resultDiv.innerHTML += `
+      <p>30% от 2%: <b>${thirtyPercentOfTwoPercent.toLocaleString(
+        'ru-RU'
+      )}</b></p>
+      <p>30% от 1%: <b>${thirtyPercentOfOnePercent.toLocaleString(
+        'ru-RU'
+      )}</b></p>
+    `;
+  });
 }
 
-// Функция для расчета 30% от уже рассчитанных значений
-function calculateThirtyPercent(values) {
-  const thirtyPercentOfTwoPercent = Math.floor(values.twoPercent * 0.3); // Округляем до целого
-  const thirtyPercentOfOnePercent = Math.floor(values.onePercent * 0.3); // Округляем до целого
-
-  return {
-    thirtyPercentOfTwoPercent: thirtyPercentOfTwoPercent,
-    thirtyPercentOfOnePercent: thirtyPercentOfOnePercent,
-  };
-}
-
-// Функция форматирования числа с разделением пробелами
-function formatNumberWithSpaces(number) {
-  return number.toLocaleString('ru-RU');
-}
-
-// Пример использования
-const propertyValue = prompt('Введите сумму стоимости недвижимости:');
-const baseResult = calculatePropertyTax(parseFloat(propertyValue));
-
-if (typeof baseResult === 'string') {
-  console.log(baseResult);
-  alert(baseResult);
-} else {
-  console.log(
-    `2% от стоимости: ${formatNumberWithSpaces(baseResult.twoPercent)}`
-  );
-  console.log(
-    `1% от стоимости: ${formatNumberWithSpaces(baseResult.onePercent)}`
-  );
-  alert(
-    `2% от стоимости: ${formatNumberWithSpaces(baseResult.twoPercent)}\n` +
-      `1% от стоимости: ${formatNumberWithSpaces(baseResult.onePercent)}`
-  );
-
-  // Спрашиваем пользователя, хочет ли он показать 30%
-  const showThirty = confirm('Показать 30% от этих значений?');
-  if (showThirty) {
-    const thirtyPercentResult = calculateThirtyPercent(baseResult);
-    console.log(
-      `30% от 2%: ${formatNumberWithSpaces(
-        thirtyPercentResult.thirtyPercentOfTwoPercent
-      )}`
-    );
-    console.log(
-      `30% от 1%: ${formatNumberWithSpaces(
-        thirtyPercentResult.thirtyPercentOfOnePercent
-      )}`
-    );
-    alert(
-      `30% от 2%: ${formatNumberWithSpaces(
-        thirtyPercentResult.thirtyPercentOfTwoPercent
-      )}\n` +
-        `30% от 1%: ${formatNumberWithSpaces(
-          thirtyPercentResult.thirtyPercentOfOnePercent
-        )}`
-    );
-  }
-}
+// Связываем кнопку с функцией
+document.getElementById('calculateButton').addEventListener('click', calculate);
