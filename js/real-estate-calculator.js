@@ -27,7 +27,7 @@ function calculate() {
   resultDiv.innerHTML = `
     <p>2% от стоимости: <b>${twoPercent.toLocaleString('ru-RU')}</b></p>
     <p>1% от стоимости: <b>${onePercent.toLocaleString('ru-RU')}</b></p>
-    <button id="showThirtyPercent">Показать 30% от этих значений</button>
+    <button id="showThirtyPercent">Показать 30%</button>
   `;
 
   // Обработчик для 30%
